@@ -5,29 +5,31 @@
 # Ability to remove the shortcut
 param ($uninstall = $false)
 
-# Variables
-$icoPath = "C:\Users\Public\Pictures\"
-$lnkPath = "C:\Users\Public\Desktop\"
-$program = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-$ico = ""
-$uri = ""
-$name = "nameMe.lnk"
+if ($uninstall -eq $false) {
 
-# Move ICO file
-Copy-Item $ico -Destination $icoPath
+    # Variables
+    $icoPath = "C:\Users\Public\Pictures\"
+    $lnkPath = "C:\Users\Public\Desktop\"
+    $program = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+    $ico = ""
+    $uri = ""
+    $name = "nameMe.lnk"
 
-# Create shortcut
-$WScriptObj = New-Object -ComObject ("WScript.Shell")
-$ShortcutPath = "$lnkPath$name"
-$shortcut = $WscriptObj.CreateShortcut($ShortcutPath)
-$shortcut.TargetPath = $program
-$shortcut.Arguments = $uri
-$ShortCut.IconLocation = "$icoPath$ico, 0"
-$shortcut.Save()
+    # Move ICO file
+    Copy-Item $ico -Destination $icoPath
 
-# Don't forget to place your ico file in the folder
-
-if ($uninstall) {
+    # Create shortcut
+    $WScriptObj = New-Object -ComObject ("WScript.Shell")
+    $ShortcutPath = "$lnkPath$name"
+    $shortcut = $WscriptObj.CreateShortcut($ShortcutPath)
+    $shortcut.TargetPath = $program
+    $shortcut.Arguments = $uri
+    $ShortCut.IconLocation = "$icoPath$ico, 0"
+    $shortcut.Save()
+}
+else {
     Remove-Item -Path "$lnkPath$name" -Force
     Remove-Item -Path "$icoPath$ico" -Force
 }
+
+# Don't forget to place your ico file in the folder

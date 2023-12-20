@@ -1,6 +1,6 @@
  # Template script for creating shortcuts
 # Author:  Sean Richards
-# Date:  12/13/2023
+# Date:  12/20/2023
 
 # Ability to remove the shortcut
 param ($uninstall = $false)

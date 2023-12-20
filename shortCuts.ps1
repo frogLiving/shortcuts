@@ -5,15 +5,17 @@
 # Ability to remove the shortcut
 param ($uninstall = $false)
 
-if ($uninstall -eq $false) {
+# Required configuration
+$ico = ""
+$uri = ""
+$name = "nameMe.lnk"
 
-    # Variables
-    $icoPath = "C:\Users\Public\Pictures\"
-    $lnkPath = "C:\Users\Public\Desktop\"
-    $program = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-    $ico = ""
-    $uri = ""
-    $name = "nameMe.lnk"
+# Constant Variables
+$icoPath = "C:\Users\Public\Pictures\"
+$lnkPath = "C:\Users\Public\Desktop\"
+$program = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+
+if ($uninstall -eq $false) {
 
     # Move ICO file
     Copy-Item $ico -Destination $icoPath
@@ -28,8 +30,8 @@ if ($uninstall -eq $false) {
     $shortcut.Save()
 }
 else {
-    Remove-Item -Path "$lnkPath$name" -Force
-    Remove-Item -Path "$icoPath$ico" -Force
+    Remove-Item -Path $lnkPath$name -Force
+    Remove-Item -Path $icoPath$ico -Force
 }
 
 # Don't forget to place your ico file in the folder
